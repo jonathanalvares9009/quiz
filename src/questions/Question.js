@@ -1,10 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import shuffleArray from "../utilities/shuffle.js";
+import Answer from "./Answer.js";
+import CategoryContext from "../quizContext.js";
 
 function Question(props) {
-  const [index, setIndex] = useState(0);
   const [answers, setAnswer] = useState([]);
+  const { selected, setSelected, setCorrect, index, setIndex } =
+    useContext(CategoryContext);
+
+  useEffect(() => {
+    setIndex(index + 1);
+    let answerArray = [];
+    answerArray = answerArray.concat(props.data[index].correctAnswer);
+    answerArray = answerArray.concat(props.data[index].incorrectAnswers);
+    answerArray = shuffleArray(answerArray);
+    setAnswer(answerArray);
+    setSelected(0);
+    setCorrect(0);
+  }, [selected]);
 
   useEffect(() => {
     let answerArray = [];
@@ -12,7 +26,6 @@ function Question(props) {
     answerArray = answerArray.concat(props.data[index].incorrectAnswers);
     answerArray = shuffleArray(answerArray);
     setAnswer(answerArray);
-    console.log("Shuffled", answerArray);
   }, [index]);
 
   return (
@@ -21,12 +34,10 @@ function Question(props) {
         {props.data[index].question}
       </div>
       {answers.map((answer) => (
-        <div
-          className="rounded hover:rounded-lg hover:bg-green-500/50 border-8 text-center logo mb-5 ml-3 mr-3"
-          key={answer}
-        >
-          {answer}
-        </div>
+        <Answer
+          answer={answer}
+          correctAnswer={props.data[index].correctAnswer}
+        />
       ))}
       {/* center the div */}
       <div className="flex justify-center">

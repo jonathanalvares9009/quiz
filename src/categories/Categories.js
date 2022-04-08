@@ -2,10 +2,10 @@ import { useContext } from "react";
 import "../index.css";
 
 import categories from "./categoryList";
-import CategoryContext from "../categoryContext";
+import QuizContext from "../quizContext";
 
 function Categories() {
-  const { category, setCategory } = useContext(CategoryContext);
+  const { category, setCategory } = useContext(QuizContext);
 
   const handleChange = (e) => {
     setCategory(e.target.value);

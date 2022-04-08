@@ -5,22 +5,36 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 import Categories from "./categories/Categories";
 import categories from "./categories/categoryList";
-import CategoryContext from "./categoryContext";
+import QuizContext from "./quizContext";
 import Questions from "./questions/Questions";
 
 const queryClient = new QueryClient();
 
 function App() {
   const [category, setCategory] = useState(categories[0].value);
+  const [selected, setSelected] = useState(0);
+  const [correct, setCorrect] = useState(0);
+  const [index, setIndex] = useState(0);
 
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
-        <CategoryContext.Provider value={{ category, setCategory }}>
+        <QuizContext.Provider
+          value={{
+            category,
+            setCategory,
+            selected,
+            setSelected,
+            correct,
+            setCorrect,
+            index,
+            setIndex,
+          }}
+        >
           <h1 className="logo">Quiz App</h1>
           <Categories />
           <Questions />
-        </CategoryContext.Provider>
+        </QuizContext.Provider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </div>
