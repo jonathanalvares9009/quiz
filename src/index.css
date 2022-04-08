@@ -25,12 +25,17 @@ code {
 }
 
 @layer components {
-  .logo {
+  .logo,
+  .question {
     @apply font-mono text-lg subpixel-antialiased font-bold tracking-wide leading-7 text-center text-lime-100;
   }
   .select {
     position: fixed;
     top: 10vh;
     @apply block text-center appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+  }
+  .questions {
+    position: fixed;
+    top: 15vh;
   }
 }
