@@ -22,7 +22,7 @@ function Answer(props) {
 
   return (
     <div
-      className={`rounded hover:rounded-lg hover:bg-green-500/50 border-8 text-center logo mb-5 ml-3 mr-3 ${
+      className={`rounded hover:rounded-lg border-8 text-center logo mb-5 ml-3 mr-3 ${
         correct === 1 ? "bg-green-700" : ""
       } ${correct === -1 ? "bg-red-700" : ""}`}
       key={props.answer}
