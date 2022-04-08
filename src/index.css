@@ -23,3 +23,9 @@ code {
   width: 100vw;
   background-color: rgb(16 185 129);
 }
+
+@layer components {
+  .logo {
+    @apply font-mono text-lg subpixel-antialiased font-bold tracking-wide leading-7 text-center text-lime-100;
+  }
+}
