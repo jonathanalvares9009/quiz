@@ -14,7 +14,7 @@ function App() {
   const [category, setCategory] = useState(categories[0].value);
 
   return (
-    <div className="App bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <div className="App">
       <QueryClientProvider client={queryClient}>
         <CategoryContext.Provider value={{ category, setCategory }}>
           <h1 className="logo">Quiz App</h1>
