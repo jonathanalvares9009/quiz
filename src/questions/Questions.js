@@ -8,9 +8,12 @@ const styles = {
   margin: "5vw",
 };
 
+const baseUrl = "https://the-trivia-api.com/questions";
+const limit = 10;
+
 function Questions() {
   const { isLoading, data } = useQuery("repoData", () =>
-    fetch("https://the-trivia-api.com/questions?limit=5").then((res) => {
+    fetch(`${baseUrl}?limit=${limit}`).then((res) => {
       return res.json();
     })
   );
@@ -18,13 +21,7 @@ function Questions() {
   if (isLoading) return <p>Loading...</p>;
   return (
     <div className="questions" style={styles}>
-      {/* {data.map((question) => ( */}
-      <Question
-        key={data[0].id}
-        question={data[0].question}
-        answers={data[0].incorrectAnswers}
-      />
-      {/* ))} */}
+      <Question data={data} />
     </div>
   );
 }
