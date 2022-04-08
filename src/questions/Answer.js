@@ -1,8 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CategoryContext from "../quizContext";
 
 function Answer(props) {
-  const { selected, setSelected, correct, setCorrect } =
+  const [correct, setCorrect] = useState(0);
+  const { selected, setSelected, setIndexChanged } =
     useContext(CategoryContext);
 
   const onAnswer = (answer) => {
@@ -12,16 +13,21 @@ function Answer(props) {
       setCorrect(-1);
     }
     setSelected(1);
+    setIndexChanged(0);
   };
+
+  useEffect(() => {
+    setIndexChanged(0);
+  }, [selected]);
 
   return (
     <div
       className={`rounded hover:rounded-lg hover:bg-green-500/50 border-8 text-center logo mb-5 ml-3 mr-3 ${
-        correct == 1 ? "bg-green-700" : ""
-      } ${correct == -1 ? "bg-red-700" : ""}`}
+        correct === 1 ? "bg-green-700" : ""
+      } ${correct === -1 ? "bg-red-700" : ""}`}
       key={props.answer}
       onClick={() => {
-        if (selected == 0) onAnswer(props.answer);
+        if (selected === 0) onAnswer(props.answer);
       }}
     >
       {props.answer}

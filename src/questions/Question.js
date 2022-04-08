@@ -6,37 +6,26 @@ import CategoryContext from "../quizContext.js";
 
 function Question(props) {
   const [answers, setAnswer] = useState([]);
-  const { selected, setSelected, setCorrect, index, setIndex } =
+  const { index, setIndex, setIndexChanged, setSelected } =
     useContext(CategoryContext);
 
   useEffect(() => {
-    setIndex(index + 1);
     let answerArray = [];
-    answerArray = answerArray.concat(props.data[index].correctAnswer);
-    answerArray = answerArray.concat(props.data[index].incorrectAnswers);
+    answerArray = answerArray.concat(props.correctAnswer);
+    answerArray = answerArray.concat(props.incorrectAnswers);
     answerArray = shuffleArray(answerArray);
     setAnswer(answerArray);
     setSelected(0);
-    setCorrect(0);
-  }, [selected]);
-
-  useEffect(() => {
-    let answerArray = [];
-    answerArray = answerArray.concat(props.data[index].correctAnswer);
-    answerArray = answerArray.concat(props.data[index].incorrectAnswers);
-    answerArray = shuffleArray(answerArray);
-    setAnswer(answerArray);
-  }, [index]);
+  }, [props.question, index]);
 
   return (
     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 border-8 relative">
-      <div className="question mt-5 mb-5 ml-3 mr-3">
-        {props.data[index].question}
-      </div>
+      <div className="question mt-5 mb-5 ml-3 mr-3">{props.question}</div>
       {answers.map((answer) => (
         <Answer
+          key={answer}
           answer={answer}
-          correctAnswer={props.data[index].correctAnswer}
+          correctAnswer={props.correctAnswer}
         />
       ))}
       {/* center the div */}
@@ -49,19 +38,23 @@ function Question(props) {
           onClick={() => {
             if (index > 0) {
               setIndex(index - 1);
+              setIndexChanged(1);
+              setSelected(0);
             }
           }}
         >
           Previous
         </button>
-        {index}
+        {index + 1}
         <button
           className={`bg-sky-500/50 ${
-            index !== props.data.length - 1 ? "hover:bg-green-500/50" : ""
+            index !== props.length - 1 ? "hover:bg-green-500/50" : ""
           } ml-5 mb-5 logo mr-5 rounded-lg w-1/2`}
           onClick={() => {
-            if (index < props.data.length - 1) {
+            if (index < props.length - 1) {
               setIndex(index + 1);
+              setIndexChanged(1);
+              setSelected(0);
             }
           }}
         >

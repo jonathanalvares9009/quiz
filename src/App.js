@@ -13,8 +13,8 @@ const queryClient = new QueryClient();
 function App() {
   const [category, setCategory] = useState(categories[0].value);
   const [selected, setSelected] = useState(0);
-  const [correct, setCorrect] = useState(0);
   const [index, setIndex] = useState(0);
+  const [indexChanged, setIndexChanged] = useState(0);
 
   return (
     <div className="App">
@@ -25,10 +25,10 @@ function App() {
             setCategory,
             selected,
             setSelected,
-            correct,
-            setCorrect,
             index,
             setIndex,
+            indexChanged,
+            setIndexChanged,
           }}
         >
           <h1 className="logo">Quiz App</h1>
