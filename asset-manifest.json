@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/jonathanalvares9009/quiz/static/css/main.c782185c.css",
+    "main.js": "/jonathanalvares9009/quiz/static/js/main.9d36c689.js",
+    "index.html": "/jonathanalvares9009/quiz/index.html",
+    "main.c782185c.css.map": "/jonathanalvares9009/quiz/static/css/main.c782185c.css.map",
+    "main.9d36c689.js.map": "/jonathanalvares9009/quiz/static/js/main.9d36c689.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c782185c.css",
+    "static/js/main.9d36c689.js"
+  ]
+}
