@@ -1,6 +1,6 @@
 import "../index.css";
 import { useQuery } from "react-query";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import Question from "./Question";
 import QuizContext from "../quizContext";
@@ -14,14 +14,19 @@ const baseUrl = "https://the-trivia-api.com/questions";
 const limit = 10;
 
 function Questions() {
-  const { index, setIndex } = useContext(QuizContext);
+  const { index, setIndex, category, setRefresh } = useContext(QuizContext);
 
-  const { isLoading, data } = useQuery("repoData", () =>
-    fetch(`${baseUrl}?limit=${limit}`).then((res) => {
+  const { isLoading, data, refetch } = useQuery("repoData", () =>
+    fetch(`${baseUrl}?categories=${category}&limit=${limit}`).then((res) => {
       setIndex(0);
+      setRefresh(true);
       return res.json();
     })
   );
+
+  useEffect(() => {
+    refetch();
+  }, [category]);
 
   if (isLoading) return <p>Loading...</p>;
 

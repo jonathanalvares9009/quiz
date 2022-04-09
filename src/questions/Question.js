@@ -10,32 +10,52 @@ function Question(props) {
     index,
     setIndex,
     setIndexChanged,
-    selected,
     setSelected,
     hasAnswered,
     setHasAnswered,
+    category,
+    refresh,
+    setRefresh,
   } = useContext(CategoryContext);
 
   const updateMap = (k, v) => {
     setHasAnswered(hasAnswered.set(k, v));
-    console.log("Question");
   };
 
   useEffect(() => {
+    setRefresh(false);
+    setHasAnswered(hasAnswered.clear());
+    setIndex(0);
+    let answerArray = [];
+    answerArray = answerArray.concat(props.correctAnswer);
+    answerArray = answerArray.concat(props.incorrectAnswers);
+    answerArray = shuffleArray(answerArray);
+    console.log(answerArray, "selected");
+    setAnswer(answerArray);
+    updateMap(index, { answers: answerArray });
+  }, [category]);
+
+  useEffect(() => {
+    if (refresh) {
+      setRefresh(false);
+      setHasAnswered(hasAnswered.clear());
+    }
     if (hasAnswered.has(index)) {
+      console.log("Question1", hasAnswered);
       setAnswer(hasAnswered.get(index)["answers"]);
     } else {
+      console.log("Question2", hasAnswered);
       let answerArray = [];
       answerArray = answerArray.concat(props.correctAnswer);
       answerArray = answerArray.concat(props.incorrectAnswers);
       answerArray = shuffleArray(answerArray);
+      console.log(answerArray, "selected");
       setAnswer(answerArray);
       updateMap(index, { answers: answerArray });
     }
 
     setSelected(0);
-    console.log(hasAnswered, selected);
-  }, [props.question, index]);
+  }, [index, props.question]);
 
   return (
     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 border-8 relative">
