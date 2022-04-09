@@ -6,16 +6,35 @@ import CategoryContext from "../quizContext.js";
 
 function Question(props) {
   const [answers, setAnswer] = useState([]);
-  const { index, setIndex, setIndexChanged, setSelected } =
-    useContext(CategoryContext);
+  const {
+    index,
+    setIndex,
+    setIndexChanged,
+    selected,
+    setSelected,
+    hasAnswered,
+    setHasAnswered,
+  } = useContext(CategoryContext);
+
+  const updateMap = (k, v) => {
+    setHasAnswered(hasAnswered.set(k, v));
+    console.log("Question");
+  };
 
   useEffect(() => {
-    let answerArray = [];
-    answerArray = answerArray.concat(props.correctAnswer);
-    answerArray = answerArray.concat(props.incorrectAnswers);
-    answerArray = shuffleArray(answerArray);
-    setAnswer(answerArray);
+    if (hasAnswered.has(index)) {
+      setAnswer(hasAnswered.get(index)["answers"]);
+    } else {
+      let answerArray = [];
+      answerArray = answerArray.concat(props.correctAnswer);
+      answerArray = answerArray.concat(props.incorrectAnswers);
+      answerArray = shuffleArray(answerArray);
+      setAnswer(answerArray);
+      updateMap(index, { answers: answerArray });
+    }
+
     setSelected(0);
+    console.log(hasAnswered, selected);
   }, [props.question, index]);
 
   return (
