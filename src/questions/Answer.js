@@ -58,7 +58,16 @@ function Answer(props) {
       }`}
       key={props.answer}
       onClick={() => {
-        if (selected === 0) onAnswer(props.answer);
+        if (selected === 0 && !hasAnswered.has(props.index)) {
+          // if (
+          //   hasAnswered.has(props.index) &&
+          //   hasAnswered.get(props.index)["answered"]
+          // ) {
+          //   console.log("Answered");
+
+          // }
+          onAnswer(props.answer);
+        }
       }}
     >
       {props.answer}
