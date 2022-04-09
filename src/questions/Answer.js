@@ -21,6 +21,12 @@ function Answer(props) {
   const checkCorrectAns = (answer) => {
     if (
       hasAnswered.has(props.index) &&
+      hasAnswered.get(props.index)["answered"] &&
+      answer === props.correctAnswer
+    ) {
+      return true;
+    } else if (
+      hasAnswered.has(props.index) &&
       hasAnswered.get(props.index)["selectedAnswer"] === answer &&
       hasAnswered.get(props.index)["answered"] &&
       hasAnswered.get(props.index)["correct"] === 1
