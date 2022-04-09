@@ -26,6 +26,7 @@ function Question(props) {
           key={answer}
           answer={answer}
           correctAnswer={props.correctAnswer}
+          index={index}
         />
       ))}
       {/* center the div */}

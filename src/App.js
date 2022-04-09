@@ -15,6 +15,7 @@ function App() {
   const [selected, setSelected] = useState(0);
   const [index, setIndex] = useState(0);
   const [indexChanged, setIndexChanged] = useState(0);
+  const [hasAnswered, setHasAnswered] = useState(new Map());
 
   return (
     <div className="App">
@@ -29,6 +30,8 @@ function App() {
             setIndex,
             indexChanged,
             setIndexChanged,
+            hasAnswered,
+            setHasAnswered,
           }}
         >
           <h1 className="logo">Quiz App</h1>
