@@ -14,11 +14,13 @@ const baseUrl = "https://the-trivia-api.com/questions";
 const limit = 10;
 
 function Questions() {
-  const { index, setIndex, category, setRefresh } = useContext(QuizContext);
+  const { index, setIndex, category, setRefresh, setScore } =
+    useContext(QuizContext);
 
   const { isLoading, data, refetch } = useQuery("repoData", () =>
     fetch(`${baseUrl}?categories=${category}&limit=${limit}`).then((res) => {
       setIndex(0);
+      setScore(0);
       setRefresh(true);
       return res.json();
     })

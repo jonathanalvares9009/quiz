@@ -17,7 +17,7 @@ function Question(props) {
     refresh,
     setRefresh,
     score,
-    setScore,
+    selected,
   } = useContext(CategoryContext);
 
   const updateMap = (k, v) => {
@@ -87,7 +87,9 @@ function Question(props) {
         >
           Previous
         </button>
-        {score}
+        <span className={`logo ${selected ? "animate-bounce" : ""}`}>
+          {score}
+        </span>
         <button
           className={`bg-sky-500/50 ${
             index !== props.length - 1 ? "hover:bg-green-500/50" : ""
