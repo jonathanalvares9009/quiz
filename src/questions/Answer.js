@@ -9,6 +9,8 @@ function Answer(props) {
     setIndexChanged,
     hasAnswered,
     setHasAnswered,
+    score,
+    setScore,
   } = useContext(CategoryContext);
 
   const updateMap = (k, v) => {
@@ -60,9 +62,11 @@ function Answer(props) {
     };
     if (answer === props.correctAnswer) {
       setCorrect(1);
+      setScore(score + 10);
       userHasAnswered["correct"] = 1;
     } else {
       setCorrect(-1);
+      setScore(score - 5);
       userHasAnswered["correct"] = -1;
     }
     setSelected(1);
