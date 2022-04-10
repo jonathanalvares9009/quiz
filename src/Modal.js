@@ -24,16 +24,18 @@ export default function Modal(props) {
                 </button>
               </div>
               {/*body*/}
-              <div className="relative p-6 flex-auto">
-                <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                  I always felt like I could do anything. That’s the main thing
-                  people are controlled by! Thoughts- their perception of
-                  themselves! They're slowed down by their perception of
-                  themselves. If you're taught you can’t do anything, you won’t
-                  do anything. I was taught I could do everything.
-                </p>
+              <div className="grid gap-4 grid-cols-1">
+                <div className="text-center logo text-black mt-5">
+                  Correctly answered: {props.correctAnswersCount}
+                </div>
+                <div className="text-center logo text-black mt-5">
+                  Incorrectly answered: {props.incorrectAnswersCount}
+                </div>
+                <div className="text-center logo text-black mt-5">
+                  Score: {props.score} / 100
+                </div>
               </div>
-              {/*footer*/}
+              ​{/*footer*/}
               <div className="flex items-center justify-center p-6 border-t border-solid border-slate-200 rounded-b">
                 <button
                   className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1 ease-linear transition-all duration-150 flex justify-center"

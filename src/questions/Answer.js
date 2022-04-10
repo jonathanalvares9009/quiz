@@ -12,10 +12,13 @@ function Answer(props) {
     score,
     setScore,
     setShowModal,
+    correctAnswersCount,
+    incorrectAnswersCount,
+    setCorrectAnswersCount,
+    setIncorrectAnswersCount,
   } = useContext(CategoryContext);
 
   const updateMap = (k, v) => {
-    console.log("Answer");
     if (hasAnswered.has(k))
       setHasAnswered(hasAnswered.set(k, { ...hasAnswered.get(k), ...v }));
     else setHasAnswered(hasAnswered.set(k, v));
@@ -56,7 +59,6 @@ function Answer(props) {
   };
 
   const onAnswer = (answer) => {
-    console.log("onAnswer");
     let userHasAnswered = {
       answered: true,
       selectedAnswer: props.answer,
@@ -64,10 +66,12 @@ function Answer(props) {
     if (answer === props.correctAnswer) {
       setCorrect(1);
       setScore(score + 10);
+      setCorrectAnswersCount(correctAnswersCount + 1);
       userHasAnswered["correct"] = 1;
     } else {
       setCorrect(-1);
       setScore(score - 5);
+      setIncorrectAnswersCount(incorrectAnswersCount + 1);
       userHasAnswered["correct"] = -1;
     }
     setSelected(1);

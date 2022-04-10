@@ -21,6 +21,8 @@ function App() {
   const [score, setScore] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [playAgain, setPlayAgain] = useState(false);
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+  const [incorrectAnswersCount, setIncorrectAnswersCount] = useState(0);
 
   return (
     <div className="App">
@@ -44,6 +46,10 @@ function App() {
             setShowModal,
             playAgain,
             setPlayAgain,
+            correctAnswersCount,
+            setCorrectAnswersCount,
+            incorrectAnswersCount,
+            setIncorrectAnswersCount,
           }}
         >
           <h1 className="logo">Quiz App</h1>
@@ -53,6 +59,9 @@ function App() {
             <Modal
               show={{ showModal, setShowModal }}
               refresh={{ setPlayAgain }}
+              score={score}
+              correctAnswersCount={correctAnswersCount}
+              incorrectAnswersCount={incorrectAnswersCount}
             />
           )}
         </QuizContext.Provider>

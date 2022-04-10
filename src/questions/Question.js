@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 
 import shuffleArray from "../utilities/shuffle.js";
 import Answer from "./Answer.js";
-import CategoryContext from "../quizContext.js";
+import QuizContext from "../quizContext.js";
 
 function Question(props) {
   const [answers, setAnswer] = useState([]);
@@ -18,7 +18,7 @@ function Question(props) {
     setRefresh,
     score,
     selected,
-  } = useContext(CategoryContext);
+  } = useContext(QuizContext);
 
   const updateMap = (k, v) => {
     setHasAnswered(hasAnswered.set(k, v));
@@ -32,7 +32,6 @@ function Question(props) {
     answerArray = answerArray.concat(props.correctAnswer);
     answerArray = answerArray.concat(props.incorrectAnswers);
     answerArray = shuffleArray(answerArray);
-    console.log(answerArray, "selected");
     setAnswer(answerArray);
     updateMap(index, { answers: answerArray });
   }, [category]);
@@ -43,15 +42,12 @@ function Question(props) {
       setHasAnswered(hasAnswered.clear());
     }
     if (hasAnswered.has(index)) {
-      console.log("Question1", hasAnswered);
       setAnswer(hasAnswered.get(index)["answers"]);
     } else {
-      console.log("Question2", hasAnswered);
       let answerArray = [];
       answerArray = answerArray.concat(props.correctAnswer);
       answerArray = answerArray.concat(props.incorrectAnswers);
       answerArray = shuffleArray(answerArray);
-      console.log(answerArray, "selected");
       setAnswer(answerArray);
       updateMap(index, { answers: answerArray });
     }
