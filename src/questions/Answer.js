@@ -11,6 +11,7 @@ function Answer(props) {
     setHasAnswered,
     score,
     setScore,
+    setShowModal,
   } = useContext(CategoryContext);
 
   const updateMap = (k, v) => {
@@ -72,7 +73,9 @@ function Answer(props) {
     setSelected(1);
     setIndexChanged(0);
     updateMap(props.index, userHasAnswered);
-    console.log(hasAnswered);
+    if (props.index === 9) {
+      setShowModal(true);
+    }
   };
 
   useEffect(() => {

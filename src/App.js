@@ -7,6 +7,7 @@ import Categories from "./categories/Categories";
 import categories from "./categories/categoryList";
 import QuizContext from "./quizContext";
 import Questions from "./questions/Questions";
+import Modal from "./Modal";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,8 @@ function App() {
   const [hasAnswered, setHasAnswered] = useState(new Map());
   const [refresh, setRefresh] = useState(true);
   const [score, setScore] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [playAgain, setPlayAgain] = useState(false);
 
   return (
     <div className="App">
@@ -38,11 +41,20 @@ function App() {
             setRefresh,
             score,
             setScore,
+            setShowModal,
+            playAgain,
+            setPlayAgain,
           }}
         >
           <h1 className="logo">Quiz App</h1>
           <Categories />
           <Questions />
+          {showModal && (
+            <Modal
+              show={{ showModal, setShowModal }}
+              refresh={{ setPlayAgain }}
+            />
+          )}
         </QuizContext.Provider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
